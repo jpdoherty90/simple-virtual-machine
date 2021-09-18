@@ -39,32 +39,27 @@ func compute(memory []byte) {
 		switch op {
 		case Load:
 			registers[memory[pc+1]] = memory[memory[pc+2]]
-			pc += 3
 		case Store:
 			memory[memory[pc+2]] = registers[memory[pc+1]]
-			pc += 3
 		case Add:
 			registers[memory[pc+1]] += registers[memory[pc+2]]
-			pc += 3
 		case Sub:
 			registers[memory[pc+1]] -= registers[memory[pc+2]]
-			pc += 3
 		case Halt:
 			return
 		case Addi:
 			registers[memory[pc+1]] += memory[pc+2]
-			pc += 3
 		case Subi:
 			registers[memory[pc+1]] -= memory[pc+2]
-			pc += 3
 		case Jump:
 			pc = memory[pc+1]
+			continue
 		case Beqz:
 			if registers[memory[pc+1]] == 0x00 {
 				pc += memory[pc+2]
 			}
-			pc += 3
 		}
+		pc += 3
 
 	}
 
